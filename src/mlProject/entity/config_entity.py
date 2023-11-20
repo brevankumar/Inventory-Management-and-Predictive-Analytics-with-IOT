@@ -15,8 +15,14 @@ class DataIngestionConfig:
 class DataValidationConfig:
     root_dir: Path
     STATUS_FILE: str
-    unzip_data_dir: Path
     all_schema: dict
+    input_folder : Path
+    output_folder : Path
+    input_file1 : Path
+    input_file2 : Path
+    input_file3 : Path
+    output_directory : Path
+    merged_output: Path
 
 
 

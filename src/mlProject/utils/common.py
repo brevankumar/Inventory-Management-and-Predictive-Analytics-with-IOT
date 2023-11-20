@@ -8,6 +8,9 @@ from ensure import ensure_annotations
 from box import ConfigBox
 from pathlib import Path
 from typing import Any
+import pandas as pd
+from datetime import datetime
+
 
 
 
@@ -125,5 +128,21 @@ def get_size(path: Path) -> str:
     size_in_kb = round(os.path.getsize(path)/1024)
     return f"~ {size_in_kb} KB"
 
+@ensure_annotations
+def convert_to_datetime(data: pd.DataFrame = None, column: str = None):
+
+    dummy = data.copy()
+    dummy[column] = pd.to_datetime(dummy[column], format='%Y-%m-%d %H:%M:%S')
+    return dummy
+
+@ensure_annotations
+def convert_timestamp_to_hourly(data: pd.DataFrame = None, column: str = None):
+    
+    dummy = data.copy()
+    new_ts = dummy[column].tolist()
+    new_ts = [i.strftime('%Y-%m-%d %H:00:00') for i in new_ts]
+    new_ts = [datetime.strptime(i, '%Y-%m-%d %H:00:00') for i in new_ts]
+    dummy[column] = new_ts
+    return dummy
 
 

@@ -13,6 +13,8 @@ class DataValidationTrainingPipeline:
         config = ConfigurationManager()
         data_validation_config = config.get_data_validation_config()
         data_validation = DataValiadtion(config=data_validation_config)
+        data_validation.process_and_save_csv()
+        data_validation.merge_and_save()
         data_validation.validate_all_columns()
 
 

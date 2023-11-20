@@ -11,12 +11,12 @@ class ConfigurationManager:
         self,
         config_filepath = CONFIG_FILE_PATH,
         #params_filepath = PARAMS_FILE_PATH,
-        #schema_filepath = SCHEMA_FILE_PATH
+        schema_filepath = SCHEMA_FILE_PATH
         ):
 
         self.config = read_yaml(config_filepath)
         #self.params = read_yaml(params_filepath)
-        #self.schema = read_yaml(schema_filepath)
+        self.schema = read_yaml(schema_filepath)
 
         create_directories([self.config.artifacts_root])
         
@@ -45,9 +45,15 @@ class ConfigurationManager:
 
         data_validation_config = DataValidationConfig(
             root_dir=config.root_dir,
-            STATUS_FILE=config.STATUS_FILE,
-            unzip_data_dir = config.unzip_data_dir,
-            all_schema=schema,
+            input_folder = config.input_folder,
+            output_folder = config.output_folder,
+            input_file1 = config.input_file1,
+            input_file2 = config.input_file2,
+            input_file3 = config.input_file3,
+            output_directory = config.output_directory,
+            merged_output = config.merged_output,
+            STATUS_FILE = config.STATUS_FILE,
+            all_schema=schema
         )
 
         return data_validation_config
