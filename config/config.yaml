@@ -20,8 +20,6 @@ data_validation:
   STATUS_FILE: artifacts/data_validation/status.txt
 
 
-
-
 data_transformation:
   root_dir: artifacts/data_transformation
   train_file_path: artifacts/data_validation/train.csv
