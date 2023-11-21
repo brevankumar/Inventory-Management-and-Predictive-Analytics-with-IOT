@@ -10,6 +10,8 @@ from pathlib import Path
 from typing import Any
 import pandas as pd
 from datetime import datetime
+import numpy as np
+import dill
 
 
 
@@ -146,3 +148,67 @@ def convert_timestamp_to_hourly(data: pd.DataFrame = None, column: str = None):
     return dummy
 
 
+@ensure_annotations
+def load_numpy_array_data(file_path: Path) -> np.array:
+    """
+    load numpy array data from file
+    file_path: str location of file to load
+    return: np.array data loaded
+    """
+   
+    with open(file_path, "rb") as file_obj:
+        return np.load(file_obj)
+
+
+  
+@ensure_annotations
+def load_object(file_path: Path) -> object:
+            
+    if not os.path.exists(file_path):
+        raise Exception(f"The file: {file_path} is not exists")
+    with open(file_path, "rb") as file_obj:
+        return dill.load(file_obj)
+
+
+@ensure_annotations
+def save_numpy_array(data_array, directory, filename):
+    """
+    Save a NumPy array to a specific directory.
+
+    Parameters:
+    - data_array: NumPy array to be saved.
+    - directory: Directory path where the array will be saved.
+    - filename: Name of the file to be created.
+
+    Returns:
+    - Full path to the saved file.
+    """
+    # Ensure the directory exists; create it if it doesn't
+    os.makedirs(directory, exist_ok=True)
+
+    # Join the directory path and the filename to get the full file path
+    file_path = os.path.join(directory, filename)
+
+    # Save the NumPy array to the specified file path
+    np.save(file_path, data_array)
+
+    return file_path
+
+@ensure_annotations
+def save_preprocessor(preprocessor, directory_path):
+    """
+    Save a preprocessor object to the specified directory.
+
+    Parameters:
+    - preprocessor: The preprocessor object to be saved.
+    - directory_path: The directory path where the preprocessor object will be saved.
+    """
+    # Check if the directory exists, and create it if not
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path)
+
+    # Construct the full file path for saving the preprocessor
+    file_path = os.path.join(directory_path, 'preprocessor_model.joblib')
+
+    # Save the preprocessor object to the specified file path
+    joblib.dump(preprocessor, file_path)

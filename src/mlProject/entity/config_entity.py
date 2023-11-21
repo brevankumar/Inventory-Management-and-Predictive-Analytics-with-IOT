@@ -29,7 +29,11 @@ class DataValidationConfig:
 @dataclass(frozen=True)
 class DataTransformationConfig:
     root_dir: Path
-    data_path: Path
+    train_file_path: Path
+    test_file_path: Path
+    transformed_object_file_path: Path
+    transformed_train_file_path: Path
+    transformed_test_file_path: Path
 
 
 

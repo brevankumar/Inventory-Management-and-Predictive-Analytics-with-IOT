@@ -67,7 +67,11 @@ class ConfigurationManager:
 
         data_transformation_config = DataTransformationConfig(
             root_dir=config.root_dir,
-            data_path=config.data_path,
+            train_file_path = config.train_file_path,
+            test_file_path = config.test_file_path,
+            transformed_object_file_path = config.transformed_object_file_path,
+            transformed_train_file_path = config.transformed_train_file_path,
+            transformed_test_file_path = config.transformed_test_file_path
         )
 
         return data_transformation_config

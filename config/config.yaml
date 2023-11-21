@@ -16,7 +16,7 @@ data_validation:
   input_file2 : artifacts/data_validation/validated_data_after_dropping_columns/Dropped_validated_sensor_stock_levels.csv
   input_file3 : artifacts/data_validation/validated_data_after_dropping_columns/Dropped_validated_sensor_storage_temperature.csv
   output_directory : artifacts/data_validation/validated_data_after_dropping_columns
-  merged_output: artifacts\data_validation\validated_data_after_dropping_columns\merged_output.csv
+  merged_output: artifacts/data_validation/validated_data_after_dropping_columns/merged_output.csv
   STATUS_FILE: artifacts/data_validation/status.txt
 
 
@@ -24,8 +24,11 @@ data_validation:
 
 data_transformation:
   root_dir: artifacts/data_transformation
-  data_path: artifacts/data_ingestion/winequality-red.csv
-
+  train_file_path: artifacts/data_validation/train.csv
+  test_file_path: artifacts/data_validation/test.csv
+  transformed_object_file_path: artifacts/data_transformation
+  transformed_train_file_path: artifacts/data_transformation
+  transformed_test_file_path: artifacts/data_transformation
 
 
 model_trainer:

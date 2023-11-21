@@ -16,6 +16,7 @@ class DataValidationTrainingPipeline:
         data_validation.process_and_save_csv()
         data_validation.merge_and_save()
         data_validation.validate_all_columns()
+        data_validation.train_test_spliting()
 
 
 if __name__ == '__main__':
