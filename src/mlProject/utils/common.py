@@ -147,28 +147,7 @@ def convert_timestamp_to_hourly(data: pd.DataFrame = None, column: str = None):
     dummy[column] = new_ts
     return dummy
 
-
-@ensure_annotations
-def load_numpy_array_data(file_path: Path) -> np.array:
-    """
-    load numpy array data from file
-    file_path: str location of file to load
-    return: np.array data loaded
-    """
-   
-    with open(file_path, "rb") as file_obj:
-        return np.load(file_obj)
-
-
   
-@ensure_annotations
-def load_object(file_path: Path) -> object:
-            
-    if not os.path.exists(file_path):
-        raise Exception(f"The file: {file_path} is not exists")
-    with open(file_path, "rb") as file_obj:
-        return dill.load(file_obj)
-
 
 @ensure_annotations
 def save_numpy_array(data_array, directory, filename):
@@ -212,3 +191,44 @@ def save_preprocessor(preprocessor, directory_path):
 
     # Save the preprocessor object to the specified file path
     joblib.dump(preprocessor, file_path)
+
+@ensure_annotations
+def load_numpy_array_data(file_path):
+    """
+    Load a NumPy array from the specified file path.
+
+    Parameters:
+    - file_path: The path to the file containing the NumPy array.
+
+    Returns:
+    - numpy_array: The loaded NumPy array.
+    """
+    try:
+        # Load the NumPy array from the specified file path
+        numpy_array = np.load(file_path)
+        return numpy_array
+    except FileNotFoundError:
+        print(f"Error: The file '{file_path}' does not exist.")
+    except Exception as e:
+        print(f"Error: Unable to load data from '{file_path}'.\n{e}")
+
+
+@ensure_annotations
+def load_object(file_path):
+    """
+    Load an object from the specified file path.
+
+    Parameters:
+    - file_path: The path to the file containing the object.
+
+    Returns:
+    - loaded_object: The loaded object.
+    """
+    try:
+        # Load the object from the specified file path
+        loaded_object = joblib.load(file_path)
+        return loaded_object
+    except FileNotFoundError:
+        print(f"Error: The file '{file_path}' does not exist.")
+    except Exception as e:
+        print(f"Error: Unable to load object from '{file_path}'.\n{e}")

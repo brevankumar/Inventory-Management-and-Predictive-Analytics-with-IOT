@@ -1,3 +1,8 @@
-ElasticNet:
-  alpha: 0.2
-  l1_ratio: 0.1
+RandomForestRegressor:
+  n_estimators: 126
+  min_weight_fraction_leaf: 0.0
+  min_samples_split: 5
+  min_samples_leaf: 5
+  min_impurity_decrease: 0.2
+  max_leaf_nodes: 50
+  max_depth: 30

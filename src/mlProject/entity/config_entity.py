@@ -43,9 +43,14 @@ class ModelTrainerConfig:
     train_data_path: Path
     test_data_path: Path
     model_name: str
-    alpha: float
-    l1_ratio: float
     target_column: str
+    n_estimators: int
+    min_weight_fraction_leaf: float
+    min_samples_split: int
+    min_samples_leaf: int
+    min_impurity_decrease: float
+    max_leaf_nodes: int
+    max_depth: int
 
 
 @dataclass(frozen=True)
