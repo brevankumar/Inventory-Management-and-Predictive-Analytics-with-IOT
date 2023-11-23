@@ -1,7 +1,8 @@
 import os
 import pandas as pd
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-from src.mlProject.utils.common import save_json
+from sklearn.metrics import mean_squared_error, mean_absolute_error
+from src.mlProject.utils.common import *
+from src.mlProject.constants import *
 from urllib.parse import urlparse
 import numpy as np
 import joblib
@@ -17,25 +18,31 @@ class ModelEvaluation:
     def eval_metrics(self,actual, pred):
         rmse = np.sqrt(mean_squared_error(actual, pred))
         mae = mean_absolute_error(actual, pred)
-        r2 = r2_score(actual, pred)
-        return rmse, mae, r2
+        return rmse, mae
     
 
 
     def save_results(self):
 
-        test_data = pd.read_csv(self.config.test_data_path)
+        train_arr = load_numpy_array_data(self.config.train_data_path)
+        test_arr = load_numpy_array_data(self.config.test_data_path)
+
+        x_train, y_train, x_test, y_test = (
+                train_arr[:, :-1],
+                train_arr[:, -1],
+                test_arr[:, :-1],
+                test_arr[:, -1],
+            )
+
+
         model = joblib.load(self.config.model_path)
 
-        test_x = test_data.drop([self.config.target_column], axis=1)
-        test_y = test_data[[self.config.target_column]]
         
-        predicted_qualities = model.predict(test_x)
+        predicted_qualities = model.predict(x_test)
 
-        (rmse, mae, r2) = self.eval_metrics(test_y, predicted_qualities)
+        (rmse, mae) = self.eval_metrics(y_test, predicted_qualities)
         
         # Saving metrics as local
-        scores = {"rmse": rmse, "mae": mae, "r2": r2}
+        scores = {"rmse": rmse, "mae": mae}
         save_json(path=Path(self.config.metric_file_name), data=scores)
-
 
