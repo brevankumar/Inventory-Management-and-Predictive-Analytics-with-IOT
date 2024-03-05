@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div class="login">
+      <h3>Predict Census Income</h3>
+
+        <!-- Form to enter new data for predictions  -->
+        <form action="{{url_for('predict_datapoint')}}" method="POST">
+
+          <div class="mb-3">
+            <label for="quantity">quantity:</label>
+            <input type="text" id="quantity" name="quantity" placeholder="Enter quantity value (int)">
+          </div>
+
+          <div class="mb-3">
+            <label for="timestamp_day_of_month">timestamp_day_of_month:</label>
+            <input type="text" id="timestamp_day_of_month" name="timestamp_day_of_month" placeholder="Enter timestamp_day_of_month value (int)">
+          </div>
+
+          <div class="mb-3">
+            <label for="timestamp_day_of_week">timestamp_day_of_week:</label>
+            <input type="text" id="timestamp_day_of_week" name="timestamp_day_of_week" placeholder="Enter timestamp_day_of_week value (int)">
+          </div>
+
+          <div class="mb-3">
+            <label for="timestamp_hour">timestamp_hour:</label>
+            <input type="text" id="timestamp_hour" name="timestamp_hour" placeholder="Enter timestamp_hour value (int)">
+          </div>
+          
+          <div class="form-group">
+              <label for="temperature">temperature:</label>
+              <input type="text" id="temperature" name="temperature" placeholder="Enter temperature value (float)">
+          </div>    
+          
+          <div class="form-group">
+            <label for="unit_price">unit_price:</label>
+            <input type="text" id="unit_price" name="unit_price" placeholder="Enter unit_price value (float)">
+        </div>  
+
+        
+          <div class="form-group">
+            <label for="category">category:</label>
+            <select id="category" name="category">
+              <option value=" kitchen">kitchen</option>
+              <option value=" vegetables">vegetables</option>
+              <option value=" baby products">baby products</option>
+              <option value=" beverages">beverages</option>
+              <option value=" pets">pets</option>
+              <option value=" meat">meat</option>
+              <option value=" fruit">fruit</option>
+              <option value=" frozen">frozen</option>
+              <option value=" spices and herbs">spices and herbs</option>
+              <option value=" medicine">medicine</option>
+              <option value=" baking">baking</option>
+              <option value=" personal care">personal care</option>
+              <option value=" cleaning products">cleaning products</option>
+              <option value=" dairy">dairy</option>
+              <option value=" condiments and sauces">condiments and sauces</option>
+              <option value=" refrigerated items">refrigerated items</option>
+              <option value=" packaged foods">packaged foods</option>
+              <option value=" baked goods">baked goods</option>
+              <option value=" snacks">snacks</option>
+              <option value=" cheese">cheese</option>
+              <option value=" canned foods">canned foods</option>
+              <option value=" seafood">seafood</option>
+            </select>
+          <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+        </form>
+    
+  </body>
+</html>
